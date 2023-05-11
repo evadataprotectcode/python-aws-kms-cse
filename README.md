@@ -1,15 +1,16 @@
 # Evadata AWS client side encryption   
-This is a Node.js command line utility to upload/download client-side encrypted files
+This is a python command line utility to upload/download client-side encrypted files
 
 ## Prerequisites
- - Node v12 or higher
+ - Python3 or higher
+ - Pip installed
 
 ## Build
 ```
-npm ci
+python3 -m pip install -r requirements.txt
 ```
 
 ## Run
 ```
-node index.js
+python3 index.py
 ```
