@@ -12,7 +12,7 @@
   },
   "devDependencies": {
     "@hapi/bossy": "^5.1.0",
-    "aws-sdk": "^2.913.0",
+    "aws-sdk": "^2.1377.0",
     "progress": "^2.0.3"
   }
 }
