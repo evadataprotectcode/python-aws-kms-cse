@@ -4,10 +4,10 @@ import boto3
 def encrypt(file_name, key_arn):
   client = boto3.client('kms')
 
-  fileInBytes = open(file_name, 'rb')
+  file_in_bytes = open(file_name, 'rb')
   encryption = client.encrypt(
     KeyId=key_arn,
-    Plaintext=fileInBytes.read()
+    Plaintext=file_in_bytes.read()
   )
 
   return encryption['CiphertextBlob']
