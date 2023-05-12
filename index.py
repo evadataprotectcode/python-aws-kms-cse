@@ -6,41 +6,6 @@ import argparse
 import lib.index as App
 
 
-# internals.defintion = {
-#   h: {
-#     description: 'Show help',
-#     alias: 'help',
-#     type: 'boolean'
-#   },
-#   u: {
-#     description: 'Upload a file',
-#     alias: 'upload',
-#     type: 'boolean',
-#   },
-#   d: {
-#     description: 'Download a file',
-#     alias: 'download',
-#     type: 'boolean',
-#   },
-#   f: {
-#     description: 'File to upload/download',
-#     alias: 'file',
-#     type: 'string',
-#     require: True
-#   },
-#   b: {
-#     description: 'S3 bucket name to upload/download',
-#     alias: 's3Bucket',
-#     type: 'string',
-#     require: True
-#   },
-#   k: {
-#     description: 'KMS key arn to use to encrypt the file',
-#     alias: 'kmsArn',
-#     type: 'string',
-#   }
-# }
-
 def run():
   parser = argparse.ArgumentParser()
 
@@ -79,45 +44,41 @@ def run():
 
   args = parser.parse_args();
 
-  # if args instanceof Error:
-  #   return console.error(args.message)
-
 
   if args.upload and args.download:
     return print('Please choose either upload or download, not both')
 
 
-  file = args.file
-  s3Bucket = args.s3Bucket
-  kmsArn = args.kmsArn
+  file_name = args.file
+  s3_bucket = args.s3Bucket
+  kms_arn = args.kmsArn
 
   if args.upload:
-    return upload(file, s3Bucket, kmsArn)
+    return upload(file_name, s3_bucket, kms_arn)
 
 
   if args.download:
-    return download(file, s3Bucket, kmsArn)
+    return download(file_name, s3_bucket, kms_arn)
 
 
   print('You must specify either --upload or --download')
-  print(parser.print_help())
-  # return print(Bossy.usage(internals.definition))
+  parser.print_help()
 
 
-def upload(file, s3Bucket, kmsArn):
+def upload(file_name, s3_bucket, kms_arn):
   dirname = os.getcwd()
-  filePath = Path.join(dirname, file)
-  s3Key = Path.basename(file)
+  file_path = Path.join(dirname, file_name)
+  s3_key = Path.basename(file_name)
 
-  return App.upload(filePath, s3Bucket, s3Key, kmsArn)
+  return App.upload(file_path, s3_bucket, s3_key, kms_arn)
 
 
-def download(file, s3Bucket, kmsArn):
+def download(file_name, s3_bucket, kms_arn):
   dirname = os.getcwd()
-  filePath = Path.join(dirname, file)
-  print('File will be available here: ', filePath)
+  file_path = Path.join(dirname, file_name)
+  print('File will be available here: ', file_path)
 
-  return App.download(filePath, s3Bucket, file, kmsArn)
+  return App.download(file_path, s3_bucket, file_name, kms_arn)
 
 
 run()

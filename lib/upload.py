@@ -1,9 +1,9 @@
 import lib.aws.s3 as s3
 import lib.aws.cse as cse
 
-def uploadEncrypted(filePath, bucketName, s3Key, cseKeyArn):
-  encryptedText = cse.encrypt(filePath, cseKeyArn)
-  return s3.upload(filePath, bucketName, s3Key, encryptedText)
+def uploadEncrypted(file_path, bucket_name, s3_key, cse_key_arn):
+  encrypted_text = cse.encrypt(file_path, cse_key_arn)
+  return s3.upload(bucket_name, s3_key, encrypted_text)
 
-def upload(filePath, bucketName, s3Key):
-  return s3.upload(filePath, bucketName, s3Key, open(filePath, 'rb'))
+def upload(file_path, bucket_name, s3_key):
+  return s3.upload(bucket_name, s3_key, open(file_path, 'rb'))
