@@ -67,15 +67,15 @@ def run():
 
 def upload(file_name, s3_bucket, kms_arn):
   dirname = os.getcwd()
-  filePath = Path.join(dirname, file)
-  s3Key = Path.basename(file)
+  file_path = Path.join(dirname, file_name)
+  s3_key = Path.basename(file_name)
 
   return App.upload(file_path, s3_bucket, s3_key, kms_arn)
 
 
 def download(file_name, s3_bucket, kms_arn):
   dirname = os.getcwd()
-  file_path = Path.join(dirname, file)
+  file_path = Path.join(dirname, file_name)
   print('File will be available here: ', file_path)
 
   return App.download(file_path, s3_bucket, file_name, kms_arn)
